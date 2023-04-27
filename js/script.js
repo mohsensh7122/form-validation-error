@@ -31,12 +31,28 @@ document.querySelector('#languages').addEventListener('change', e => {
     // 1b. Remove from the `element` parameter's `parentElement` the className 'not-valid`
     // 1c. Hide the `lastElementChild` of the `element` parameter's `parentElement`
 
+function validationPass(element){
+
+  element.parentElement.classList.add('valid');
+  element.parentElement.classList.remove('not-valid');
+  element.parentElement.lastElementChild.style.display = 'none';
+
+}
+
 
 // 2. Create a function named `validationFail` and give it one parameter: `element`
   // Inside the function:
     // 2a. Give the `element` parameter's `parentElement` the className 'not-valid'
     // 2b. Remove from the `element` parameter's `parentElement` the className 'valid`
     // 2c. Display the `lastElementChild` of the `element` parameter's `parentElement`
+
+function validationFail(element){
+
+  element.parentElement.classList.add('not-valid');
+  element.parentElement.classList.remove('valid');
+  element.parentElement.lastElementChild.style.display = 'block';
+
+}
 
     
 //3. Complete the steps in the three functions below
@@ -55,6 +71,11 @@ const nameValidator = () => {
     // If `nameIsValid` equals true, call the `validationPass` function and pass it the `nameElement` variable from above as an argument
     // Else call the `validationFail` function and pass it the `nameElement` variable from above as an argument
 
+  if(nameIsValid){
+    validationPass(nameElement);
+  } else {
+    validationFail(nameElement);
+  }
   
   return nameIsValid;
 }
@@ -71,7 +92,11 @@ const emailValidator = () => {
   // 3b. Create an if/else statement.
     // If `emailIsValid` equals true, call the `validationPass` function and pass it the `email` variable from above as an argument
     // Else call the `validationFail` function and pass it the `email` variable from above as an argument
-
+  if(emailIsValid){
+    validationPass(email)
+  } else {
+    validationFail(email);
+  }
   
   return emailIsValid;
 }
@@ -104,6 +129,8 @@ const languageValidator = () => {
 // Something like: `nameElement.addEventListener('keyup', nameValidator);`
 
 
+nameElement.addEventListener('keyup', nameValidator);
+email.addEventListener('keyup', emailValidator)
 
 /* Submit listener on the form element */
 form.addEventListener('submit', e => {
